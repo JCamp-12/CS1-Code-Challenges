@@ -12,4 +12,27 @@
 
 const rockPaperScissors = () => {
 	// TODO: your solution here
+	// answer container
+	// we need an aarray of strings
+	//we need to iterate the first part of the array [scissors] ['scissors',]
+		//inside the for loop, we need to iterate the second part of the the array [..., 'scissors'],]
+			// inside the second for loop, we need to iterate the third part of the array [..., ..., 'scissors']
+				// once we generate all three, then we need to push to answers
+    //after forloop tango, return array
+    // so when O(n^3) is written, n is arrayOfStrings.length
+
+ const answer = [];
+ const choice = ['rock', 'paper', 'scissors'];
+  for (let i = 0; i < choice.length; i++) {
+    for (let j = 0; j < choice.length; j++) {
+      for (let k = 0; k < choice.length; k++) {
+        answer.push([choice[i], choice[j], choice[k]]);
+      }
+    }
+  }
+  return answer;
+};
+
+console.log(rockPaperScissors());
+
 };
