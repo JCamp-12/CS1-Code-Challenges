@@ -14,3 +14,92 @@
  *
  * Target time complexity: O(log(n))
  */
+
+ const rotatedArray = (arr, number) => {
+// low = 0
+// high = arr.length - 1
+// while low <= high
+  // create to be initialized to avg of low + high
+  // check if arr [middle] === number, if so, return middle
+  // if array[low] <= array[middle]
+    // if array[low] <= number && number < array [middle]
+      // set high to middle - 1
+    // else low = middle + 1
+  // else
+    // if arr[middle] < number && number <= array[high] 
+      // low = mide + 1
+    // else high = middle - 1
+  // return null;
+
+let low = 0;
+let high = arr.length - 1;
+while (low <= high) {
+	const mid = Math.floor((low + high) / 2);
+	if (arr[mid]  === number) return mid;
+	if (arr[low <= arr[mid]]) {
+		if (if arr[low] <= number && number < arr[mid]) {
+			high = mid - 1;
+		} else {
+			low = mid + 1
+		}
+	} else {
+		if (arr[mid] < number && number ,= element[high]) {
+			low = mid + 1;
+		} else {
+			high = mid - 1;
+		}
+	}
+  }
+  return null;
+ };
+
+ const rotated = (arr, searchVal) => {
+  let smIndex = 0;
+  let smVal = arr[smIndex];
+  let lgIndex = smIndex - 1;
+  let lgVal = arr[lgIndex];
+  const beginVal = arr[0];
+  const endVal = arr[arr.length - 1];
+  // establish smallest (and therefore also largest) value
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < smVal) {
+      smVal = arr[i];
+      smIndex = i;
+    }
+  }
+  // divide array into 2 arrays
+  const lgHalf = arr.slice(0, smIndex);
+  const smHalf = arr.slice(smIndex, arr.length-1);
+  // binary search through appropriate half of array
+  if (searchVal >= beginVal && searchVal <= lgVal) {
+    // binary search lgHalf
+    return binarySearch(lgHalf, searchVal);
+  } else if (searchVal >= smVal && searchVal <= endVal) {
+    // binary search smHalf
+    return binarySearch(smHalf, searchVal);
+  } else {
+    // must not be in the array
+    return null;
+  }
+};
+
+const binarySearch = (nums, target) => {
+  function bSearch(nums, target, low, high) {
+    if (target === nums[low]) {
+      return low;
+    }
+    if (nums[high] === target) {
+      return high;
+    }
+    let middle = Math.floor((low + high)/2);
+    let middleElement = nums[middle];
+    if (target === middleElement) {
+      return middle;
+    } else if (target > middleElement) {
+      return bSearch(nums, target, middle, high-1);
+    } else if (target < middleElement) {
+      return bSearch(nums, target, low+1, middle);
+    }
+  }
+  return bSearch(nums, target, 0, nums.length-1);
+};
